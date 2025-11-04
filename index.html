@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Weather app</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <ul>
+      <div class="dropdown" id="unitsDropdown">
+        <button onclick="toggleDropdown()">⚙️ Units ▾</button>
+        <div class="dropdown-content">
+          <label for="">Temperature</label>
+          <select name="Temperature" id="">
+            <option value="celsius">Celsius (°C)</option>
+            <option value="fahrenheit">Fahrenheit (°F)</option>
+          </select>
+
+          <label for="">Wind speed</label>
+          <select name="Wind speed" id="">
+            <option value="km">km/h</option>
+            <option value="mph">mph</option>
+          </select>
+
+          <label for="">Precipitation</label>
+          <select name="Precipitation" id="">
+            <option value="mm">Millimeters (mm)</option>
+            <option value="in">Inches (in)</option>
+          </select>
+        </div>
+      </div>
+    </ul>
+  </nav>
+
+  <header>
+    How's the sky looking today?
+  </header>
+  
+  <div class="search-container">
+    Search for a city, e.g., New York
+    Search
+  </div>
+
+  <section class="section1">
+    <div class="container-flex">
+      <div class="card">
+        <h3>Feels like</h3>
+        <!-- Insert temperature here -->
+      </div>
+      <div class="card">
+        <h3>Humidity</h3>
+        <!-- Insert humidity here -->
+      </div>
+      <div class="card">
+        <h3>Wind</h3>
+        <!-- Insert wind here -->   
+      </div>
+      <div class="card">
+        <h3>Precipitation</h3>
+        <!-- Insert precipitation here -->
+      </div>
+    </div>
+  </section>
+
+  <section class="section2">
+    <h2>Daily forecast</h2>
+    <!-- Insert daily forecast for the next 7 days here -->
+     <div class="container-flex">
+      <div class="card">
+
+      </div>
+     </div>
+  </section>
+
+  <section class="section3">
+    <h2>Hourly forecast</h2>
+    <!-- Insert hourly forecast for the selected day here -->
+
+  </section>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Mathis Peingnez</a>.
+  </div>
+</body>
+</html>
