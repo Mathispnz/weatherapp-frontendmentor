@@ -1,0 +1,34 @@
+{
+  "name": "weatherapp-frontendmentor",
+  "version": "1.0.0",
+  "description": "This is a solution to the [Weather app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49). Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mathispnz/weatherapp-frontendmentor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mathispnz/weatherapp-frontendmentor/issues"
+  },
+  "homepage": "https://github.com/Mathispnz/weatherapp-frontendmentor#readme",
+  "devDependencies": {
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "autoprefixer": "^10.4.22",
+    "browser-sync": "^3.0.4",
+    "cssnano": "^7.1.2",
+    "gulp": "^5.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^6.0.1",
+    "gulp-terser": "^2.1.0",
+    "sass": "^1.94.2"
+  }
+}
