@@ -16,11 +16,11 @@
   </style>
 </head>
 <body>
-
-  <nav>
+  <nav class="m-4">
+    <img src="./assets/images/logo.svg" alt="Weather Now Logo" class="logo">
     <ul>
       <div class="dropdown" id="unitsDropdown">
-        <button onclick="toggleDropdown()">⚙️ Units ▾</button>
+        <button class="btn gap-2" onclick="toggleDropdown()"><img class="dropdown-icon w-3.5" src="./assets/images/icon-units.svg" /> Units <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
         <div class="dropdown-content">
           <label for="">Temperature</label>
           <select name="Temperature" id="">
@@ -44,53 +44,141 @@
     </ul>
   </nav>
 
-  <header>
+  <header class="my-12 mx-4 text-center">
     How's the sky looking today?
   </header>
   
-  <div class="search-container">
-    Search for a city, e.g., New York
-    Search
+  <div class="flex flex-col gap-3 mx-4">
+    <button class="btn btn-search"><img src="./assets/images/icon-search.svg" alt="Search Icon"> Search for a place...</button>
+    <button class="btn btn-search btn-search_blue">Search</button>
   </div>
 
-  <section class="section1">
-    <div class="container-flex">
-      <div class="card">
+  <section class="container pt-8 px-4 section1">
+    <div class="container-flex gap-4">
+      <div class="card p-5">
         <h3>Feels like</h3>
         <!-- Insert temperature here -->
+        <h6 class="mt-6">30<sup>°</sup></h6>
       </div>
-      <div class="card">
+      <div class="card p-5">
         <h3>Humidity</h3>
         <!-- Insert humidity here -->
+        <h6 class="mt-6">46%</h6>
       </div>
-      <div class="card">
+      <div class="card p-5">
         <h3>Wind</h3>
         <!-- Insert wind here -->   
+        <h6 class="mt-6">14 km/h</h6>
       </div>
-      <div class="card">
+      <div class="card p-5">
         <h3>Precipitation</h3>
         <!-- Insert precipitation here -->
+        <h6 class="mt-6">0 mm</h6>
       </div>
     </div>
   </section>
 
-  <section class="section2">
+  <section class="container mt-8 px-4 section2">
     <h2>Daily forecast</h2>
     <!-- Insert daily forecast for the next 7 days here -->
-     <div class="container-flex">
-      <div class="card">
-
+     <div class="container-flex gap-4 mt-5">
+      <div class="card py-4 px-2.5">
+        <h3 class="card__title">
+          Tue
+        </h3>
+        <img src="./assets/images/icon-rain.webp" alt="Weather Icon" class="card__icon">
+        <div class="card__temperatures flex justify-between">
+          <p class="card__temperature">
+            20<sup>°</sup>
+          </p>
+          <p class="card__temperature card__temperature--low">
+            12<sup>°</sup>
+          </p>
+        </div>
+      </div>
+      <div class="card py-4 px-2.5">
+        <h3 class="card__title">
+          Tue
+        </h3>
+        <img src="./assets/images/icon-rain.webp" alt="Weather Icon" class="card__icon">
+        <div class="card__temperatures flex justify-between">
+          <p class="card__temperature">
+            20<sup>°</sup>
+          </p>
+          <p class="card__temperature card__temperature--low">
+            12<sup>°</sup>
+          </p>
+        </div>
+      </div>
+      <div class="card py-4 px-2.5">
+        <h3 class="card__title">
+          Tue
+        </h3>
+        <img src="./assets/images/icon-rain.webp" alt="Weather Icon" class="card__icon">
+        <div class="card__temperatures flex justify-between">
+          <p class="card__temperature">
+            20<sup>°</sup>
+          </p>
+          <p class="card__temperature card__temperature--low">
+            12<sup>°</sup>
+          </p>
+        </div>
+      </div>
+      <div class="card py-4 px-2.5">
+        <h3 class="card__title">
+          Tue
+        </h3>
+        <img src="./assets/images/icon-rain.webp" alt="Weather Icon" class="card__icon">
+        <div class="card__temperatures flex justify-between">
+          <p class="card__temperature">
+            20<sup>°</sup>
+          </p>
+          <p class="card__temperature card__temperature--low">
+            12<sup>°</sup>
+          </p>
+        </div>
       </div>
      </div>
   </section>
 
-  <section class="section3">
-    <h2>Hourly forecast</h2>
-    <!-- Insert hourly forecast for the selected day here -->
+  <section class="container mt-8 px-4 section3">
+    <div class="card py-5 px-4">
+      <div class="card__header flex justify-between items-center">
+        <h2>Hourly forecast</h2>
 
+        <button class="btn gap-2 btn--light" onclick="toggleDropdown()">Tuesday <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
+      </div>
+      <!-- Insert hourly forecast for the selected day here -->
+      <div class="card card--light flex flex-row items-center justify-between mt-4 py-2 px-3">
+        <div class="flex flex-row items-center">
+          <img src="./assets/images/icon-overcast.webp" alt="" class="card__icon w-10">
+          <p class="card__hour ml-2">3 PM</p>
+        </div>
+  
+        <p class="card__temperature">20<sup>°</sup></p>
+      </div>
+
+      <div class="card card--light flex flex-row items-center justify-between mt-4 py-2 px-3">
+        <div class="flex flex-row items-center">
+          <img src="./assets/images/icon-overcast.webp" alt="" class="card__icon w-10">
+          <p class="card__hour ml-2">3 PM</p>
+        </div>
+  
+        <p class="card__temperature">20<sup>°</sup></p>
+      </div>
+      
+      <div class="card card--light flex flex-row items-center justify-between mt-4 py-2 px-3">
+        <div class="flex flex-row items-center">
+          <img src="./assets/images/icon-overcast.webp" alt="" class="card__icon w-10">
+          <p class="card__hour ml-2">3 PM</p>
+        </div>
+  
+        <p class="card__temperature">20<sup>°</sup></p>
+      </div>
+    </div>
   </section>
 
-  <div class="attribution">
+  <div class="attribution py-4">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
     Coded by <a href="#">Mathis Peingnez</a>.
   </div>

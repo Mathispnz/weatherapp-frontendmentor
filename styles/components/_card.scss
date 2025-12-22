@@ -1,0 +1,39 @@
+@use '../abstracts/colors' as c;
+@use '../abstracts/radius' as r;
+@use '../abstracts/typo' as t;
+@use '../abstracts/spacing' as s;
+
+.card {
+    background-color: c.$color-neutral-800;
+    border: 1px solid c.$color-neutral-600;
+    border-radius: r.$radius-12;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+        color: c.$color-neutral-200;
+        @include t.text-preset-6;
+    }
+
+    h6 {
+        @include t.text-preset-3;
+    }
+
+    &--light {
+        background-color: c.$color-neutral-700;
+        border: 1px solid c.$color-neutral-600;
+    }
+
+    &__temperature {
+        @include t.text-preset-7;
+
+        &--low {
+            color: c.$color-neutral-200;
+        }
+    }
+
+    &__hour {
+        @include t.text-preset-5;
+    }
+}

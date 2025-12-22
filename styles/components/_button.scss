@@ -1,0 +1,40 @@
+@use '../abstracts/colors' as c;
+@use '../abstracts/spacing' as s;
+@use '../abstracts/radius' as r;
+@use '../abstracts/typo' as t;
+
+.dropdown {
+
+}
+.btn {
+    background-color: c.$color-neutral-800;
+    border-radius: r.$radius-4;
+    display: flex;
+    align-items: center;
+    color: c.$color-neutral-0;
+    @apply py-2 px-2.5;
+    @include t.text-preset-8;
+
+    &--light {
+        background-color: c.$color-neutral-600;
+        @apply py-2 px-4 gap-3;
+        @include t.text-preset-7;
+    }
+}
+.btn-search {
+    border-radius: r.$radius-12;
+    color: c.$color-neutral-200;
+    @apply py-4 px-8 gap-4;
+    @include t.text-preset-5-medium;
+}
+.btn-search_blue {
+    background-color: c.$color-blue-500;
+    color: c.$color-neutral-0;
+    justify-content: center;
+}
+.dropdown-icon {
+    width: 1.7rem;
+}
+.dropdown-content {
+    display: none;
+}

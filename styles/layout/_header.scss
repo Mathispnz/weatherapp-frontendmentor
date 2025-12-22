@@ -1,0 +1,6 @@
+@use '../abstracts/typo';
+@use '../abstracts/spacing';
+
+header {
+    @include typo.text-preset-2;
+}

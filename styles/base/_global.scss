@@ -1,0 +1,25 @@
+@use './abstracts/colors' as c;
+@use './abstracts/spacing' as s;
+@use './abstracts/typo' as t;
+
+body {
+    background-color: c.$color-neutral-900;
+    color: c.$color-neutral-0;
+}
+
+.container {
+
+    h2 {
+        color: c.$color-neutral-0;
+        @include t.text-preset-5;
+    }
+
+    &--background {
+        background-color: c.$color-neutral-800;
+    }
+}
+
+.container-flex {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}

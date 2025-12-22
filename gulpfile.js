@@ -7,6 +7,7 @@ const cssnano = require('cssnano');
 const babel = require('gulp-babel');
 const terser = require('gulp-terser');
 const browsersync = require('browser-sync').create();
+const tailwindcss = require('tailwindcss');
 
 // Use dart-sass for @use
 //sass.compiler = require('dart-sass');
@@ -14,8 +15,8 @@ const browsersync = require('browser-sync').create();
 // Sass Task
 function scssTask() {
   return src('styles/main.scss', { sourcemaps: true })
-    .pipe(sass())
-    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss([tailwindcss(), autoprefixer(), cssnano()]))
     .pipe(dest('dist', { sourcemaps: '.' }));
 }
 
@@ -47,13 +48,24 @@ function browserSyncReload(cb) {
   cb();
 }
 
-// Watch Task
+// // Watch Task
+// function watchTask() {
+//   watch('*.html', series(scssTask, browserSyncReload));
+//   watch(
+//     ['styles/**/*.scss', 'js/*.js'],
+//     series(scssTask, jsTask, browserSyncReload)
+//   );
+// }
+
 function watchTask() {
-  watch('*.html', browserSyncReload);
-  watch(
-    ['styles/**/*.scss', 'js/*.js'],
-    series(scssTask, jsTask, browserSyncReload)
-  );
+  // Surveille tous les fichiers HTML dans le projet
+  watch(['*.html', '**/*.html'], series(scssTask, browserSyncReload));
+
+  // Surveille les SCSS
+  watch('styles/**/*.scss', series(scssTask, browserSyncReload));
+
+  // Surveille les JS
+  watch('js/**/*.js', series(jsTask, browserSyncReload));
 }
 
 // Default Gulp Task

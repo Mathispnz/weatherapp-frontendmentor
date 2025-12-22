@@ -1,0 +1,12 @@
+@use '../abstracts/spacing';
+
+nav {
+    height: calc(33/16*1rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+        height: 100%;
+    }
+}

@@ -1,5 +1,14 @@
-@use './base/reset.scss';
-@use './abstracts/colors.scss';
-@use './abstracts/radius.scss';
-@use './abstracts/spacing.scss';
-@use './abstracts/typo.scss';
+@use './abstracts/colors';
+@use './abstracts/radius';
+@use './abstracts/spacing';
+@use './abstracts/typo';
+@use './base/reset';
+@use './base/global';
+@use './components/button';
+@use './components/card';
+@use './layout/header';
+@use './layout/nav';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
