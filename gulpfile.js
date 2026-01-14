@@ -43,19 +43,11 @@ function browserSyncServe(cb) {
   });
   cb();
 }
+
 function browserSyncReload(cb) {
   browsersync.reload();
   cb();
 }
-
-// // Watch Task
-// function watchTask() {
-//   watch('*.html', series(scssTask, browserSyncReload));
-//   watch(
-//     ['styles/**/*.scss', 'js/*.js'],
-//     series(scssTask, jsTask, browserSyncReload)
-//   );
-// }
 
 function watchTask() {
   // Surveille tous les fichiers HTML dans le projet

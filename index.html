@@ -9,39 +9,43 @@
   <title>Frontend Mentor | Weather app</title>
   
   <link rel="stylesheet" href="dist/main.css">
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
   <nav class="m-4">
     <img src="./assets/images/logo.svg" alt="Weather Now Logo" class="logo">
-    <ul>
-      <div class="dropdown" id="unitsDropdown">
-        <button class="btn gap-2" onclick="toggleDropdown()"><img class="dropdown-icon w-3.5" src="./assets/images/icon-units.svg" /> Units <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
-        <div class="dropdown-content">
-          <label for="">Temperature</label>
-          <select name="Temperature" id="">
-            <option value="celsius">Celsius (°C)</option>
-            <option value="fahrenheit">Fahrenheit (°F)</option>
-          </select>
+    <div class="dropdown" id="unitsDropdown">
+      <button class="btn gap-2" onclick="toggleDropdown()"><img class="dropdown-icon w-3.5" src="./assets/images/icon-units.svg" /> Units <img class="w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
+      <div class="dropdown-content w-[214px] rounded-xl py-1.5 px-2 mt-10">
+        <button class="py-2.5 px-2">Switch to Metric</button>
 
-          <label for="">Wind speed</label>
-          <select name="Wind speed" id="">
-            <option value="km">km/h</option>
-            <option value="mph">mph</option>
-          </select>
+        <label for="" class="mt-1 pt-1.5 pl-2">Temperature</label>
 
-          <label for="">Precipitation</label>
-          <select name="Precipitation" id="">
-            <option value="mm">Millimeters (mm)</option>
-            <option value="in">Inches (in)</option>
-          </select>
-        </div>
+        <button class="py-2.5 px-2">Celsius (°C)</button>
+        <button class="py-2.5 px-2">Fahrenheit (°F)</button>
+
+        <div class="separator mx-2 my-1"></div>
+
+        <label for="" class="mt-1 pt-1.5 pl-2">Wind speed</label>
+        <!-- <select name="Wind speed" id="">
+          <option value="km">km/h</option>
+          <option value="mph">mph</option>
+        </select> -->
+
+        <button class="py-2.5 px-2">km/h</button>
+        <button class="py-2.5 px-2">mph</button>
+
+        <div class="separator mx-2 my-1"></div>
+
+        <label for="" class="mt-1 pt-1.5 pl-2">Precipitation</label>
+        <!-- <select name="Precipitation" id="">
+          <option value="mm">Millimeters (mm)</option>
+          <option value="in">Inches (in)</option>
+        </select> -->
+
+        <button class="py-2.5 px-2">Millimeters (mm)</button>
+        <button class="py-2.5 px-2">Inches (in)</button>
       </div>
-    </ul>
+    </div>
   </nav>
 
   <header class="my-12 mx-4 text-center">
@@ -49,31 +53,41 @@
   </header>
   
   <div class="flex flex-col gap-3 mx-4">
-    <button class="btn btn-search"><img src="./assets/images/icon-search.svg" alt="Search Icon"> Search for a place...</button>
-    <button class="btn btn-search btn-search_blue">Search</button>
+    <input type="text" id="searchInput" placeholder="Search for a place..." class="btn btn-search" />
+    <button id="searchBtn" class="btn btn-search btn-search_blue">Search</button>
   </div>
 
   <section class="container pt-8 px-4 section1">
-    <div class="container-flex gap-4">
+    <div class="weather_info rounded-2xl h-[286px] flex flex-col justify-center bg-center">
+      <div>
+        <h3 class="weather_info__title text-center" id="location">Berlin, Germany</h3>
+        <p class="weather_info__date text-center mt-3" id="time">Tuesday, Aug 5, 2025</p>
+      </div>
+      <div class="flex items-center justify-center mt-4">
+        <img class="w-[120px]" src="./assets/images/icon-sunny.webp" alt="Sunny">
+        <p class="weather_info__temp ml-5" id="temperature">20<sup>°</sup></p>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 mt-5">
       <div class="card p-5">
         <h3>Feels like</h3>
         <!-- Insert temperature here -->
-        <h6 class="mt-6">30<sup>°</sup></h6>
+        <h6 class="mt-6" id="temperature-feels">30<sup>°</sup></h6>
       </div>
       <div class="card p-5">
         <h3>Humidity</h3>
         <!-- Insert humidity here -->
-        <h6 class="mt-6">46%</h6>
+        <h6 class="mt-6" id="humidity">46%</h6>
       </div>
       <div class="card p-5">
         <h3>Wind</h3>
         <!-- Insert wind here -->   
-        <h6 class="mt-6">14 km/h</h6>
+        <h6 class="mt-6" id="wind">14 km/h</h6>
       </div>
       <div class="card p-5">
         <h3>Precipitation</h3>
         <!-- Insert precipitation here -->
-        <h6 class="mt-6">0 mm</h6>
+        <h6 class="mt-6" id="precipitation">0 mm</h6>
       </div>
     </div>
   </section>
@@ -81,7 +95,7 @@
   <section class="container mt-8 px-4 section2">
     <h2>Daily forecast</h2>
     <!-- Insert daily forecast for the next 7 days here -->
-     <div class="container-flex gap-4 mt-5">
+     <div class="grid grid-cols-3 gap-4 mt-5">
       <div class="card py-4 px-2.5">
         <h3 class="card__title">
           Tue
@@ -166,7 +180,7 @@
   
         <p class="card__temperature">20<sup>°</sup></p>
       </div>
-      
+
       <div class="card card--light flex flex-row items-center justify-between mt-4 py-2 px-3">
         <div class="flex flex-row items-center">
           <img src="./assets/images/icon-overcast.webp" alt="" class="card__icon w-10">
@@ -182,5 +196,7 @@
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
     Coded by <a href="#">Mathis Peingnez</a>.
   </div>
+
+  <script src="./dist/script.js"></script>
 </body>
 </html>

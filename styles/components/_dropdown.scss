@@ -1,0 +1,30 @@
+@use '../abstracts/colors' as c;
+@use '../abstracts/typo' as t;
+
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: c.$color-neutral-800;
+    box-sizing: border-box;
+
+    label {
+        color: c.$color-neutral-300;
+        @include t.text-preset-8;
+    }
+
+    button {
+        width: 100%;
+        text-align: left;
+        @include t.text-preset-7;
+    }
+
+    .separator {
+        background: c.$color-neutral-600;
+        height: 1px;
+    }
+}

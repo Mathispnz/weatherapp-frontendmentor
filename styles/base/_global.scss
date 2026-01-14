@@ -8,7 +8,6 @@ body {
 }
 
 .container {
-
     h2 {
         color: c.$color-neutral-0;
         @include t.text-preset-5;
@@ -17,9 +16,4 @@ body {
     &--background {
         background-color: c.$color-neutral-800;
     }
-}
-
-.container-flex {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
 }

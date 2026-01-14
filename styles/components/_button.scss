@@ -3,9 +3,6 @@
 @use '../abstracts/radius' as r;
 @use '../abstracts/typo' as t;
 
-.dropdown {
-
-}
 .btn {
     background-color: c.$color-neutral-800;
     border-radius: r.$radius-4;
@@ -31,10 +28,4 @@
     background-color: c.$color-blue-500;
     color: c.$color-neutral-0;
     justify-content: center;
-}
-.dropdown-icon {
-    width: 1.7rem;
-}
-.dropdown-content {
-    display: none;
 }

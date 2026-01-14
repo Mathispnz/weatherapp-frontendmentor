@@ -1,0 +1,21 @@
+@use '../abstracts/colors' as c;
+@use '../abstracts/radius' as r;
+@use '../abstracts/typo' as t;
+@use '../abstracts/spacing' as s;
+
+.weather_info {
+    background: no-repeat url('../../assets/images/bg-today-small.svg');
+    background-size: cover;
+
+    &__title {
+        @include t.text-preset-4;
+    }
+
+    &__date {
+        @include t.text-preset-6;
+    }
+
+    &__temp {
+        @include t.text-preset-1;
+    }
+}

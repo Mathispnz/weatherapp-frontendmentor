@@ -6,7 +6,11 @@ module.exports = {
     './styles/**/*.scss'
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderRadius: {
+        '2xl': '1.25rem'
+      }
+    },
   },
   plugins: [],
 };
