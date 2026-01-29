@@ -4,7 +4,8 @@
   "description": "This is a solution to the [Weather app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/weather-app-K1FhddVm49). Frontend Mentor challenges help you improve your coding skills by building realistic projects.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"gulp\" \"node ./backend/server\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "@babel/preset-env": "^7.28.5",
     "autoprefixer": "^10.4.22",
     "browser-sync": "^3.0.4",
+    "concurrently": "^9.2.1",
     "cssnano": "^7.1.2",
     "gulp": "^5.0.1",
     "gulp-babel": "^8.0.0",

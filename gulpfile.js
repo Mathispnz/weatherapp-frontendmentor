@@ -34,6 +34,7 @@ function browserSyncServe(cb) {
     server: {
       baseDir: '.',
     },
+    open: false,
     notify: {
       styles: {
         top: 'auto',
