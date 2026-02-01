@@ -9,6 +9,9 @@ module.exports = {
     extend: {
       borderRadius: {
         '2xl': '1.25rem'
+      },
+      colors: {
+        colorneutral600: '#3C3B5E'
       }
     },
   },

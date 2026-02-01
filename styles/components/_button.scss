@@ -18,6 +18,9 @@
         @include t.text-preset-7;
     }
 }
+.btn-select {
+    @apply py-2.5 px-2 rounded-lg hover:bg-colorneutral600 transition-all duration-300 ease-in-out;
+}
 .btn-search {
     border-radius: r.$radius-12;
     color: c.$color-neutral-200;

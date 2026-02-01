@@ -14,14 +14,14 @@
   <nav class="m-4">
     <img src="./assets/images/logo.svg" alt="Weather Now Logo" class="logo">
     <div class="dropdown" id="unitsDropdown">
-      <button class="btn gap-2" onclick="toggleDropdown()"><img class="dropdown-icon w-3.5" src="./assets/images/icon-units.svg" /> Units <img class="w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
+      <button class="dropdown-button btn gap-2"><img class="dropdown-icon w-3.5" src="./assets/images/icon-units.svg" /> Units <img class="w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
       <div class="dropdown-content w-[214px] rounded-xl py-1.5 px-2 mt-10">
-        <button class="py-2.5 px-2">Switch to Metric</button>
+        <button class="btn--metric rounded-lg py-2.5 px-2 hover:bg-colorneutral600 transition-all duration-300 ease-in-out">Switch to Imperial</button>
 
         <label for="" class="mt-1 pt-1.5 pl-2">Temperature</label>
 
-        <button class="py-2.5 px-2">Celsius (°C)</button>
-        <button class="py-2.5 px-2">Fahrenheit (°F)</button>
+        <button class="btn-select">Celsius (°C)</button>
+        <button class="btn-select">Fahrenheit (°F)</button>
 
         <div class="separator mx-2 my-1"></div>
 
@@ -31,8 +31,8 @@
           <option value="mph">mph</option>
         </select> -->
 
-        <button class="py-2.5 px-2">km/h</button>
-        <button class="py-2.5 px-2">mph</button>
+        <button class="btn-select">km/h</button>
+        <button class="btn-select">mph</button>
 
         <div class="separator mx-2 my-1"></div>
 
@@ -42,8 +42,8 @@
           <option value="in">Inches (in)</option>
         </select> -->
 
-        <button class="py-2.5 px-2">Millimeters (mm)</button>
-        <button class="py-2.5 px-2">Inches (in)</button>
+        <button class="btn-select">Millimeters (mm)</button>
+        <button class="btn-select">Inches (in)</button>
       </div>
     </div>
   </nav>
@@ -156,7 +156,7 @@
       <div class="card__header flex justify-between items-center">
         <h2>Hourly forecast</h2>
 
-        <button class="btn gap-2 btn--light" onclick="toggleDropdown()">Tuesday <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
+        <button class="btn gap-2 btn--light">Tuesday <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" /></button>
       </div>
       <!-- Insert hourly forecast for the selected day here -->
        <div class="hourly_container">
