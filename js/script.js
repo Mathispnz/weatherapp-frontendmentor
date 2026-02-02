@@ -157,12 +157,8 @@ buttonDropdown.addEventListener('click', () => {
     dropdown.style.display === "block" ? "none" : "block";
 });
 
-// Problem: the fetch has to update if the unitParameter is imperial or metric
-// En fonction du bouton sur lequel l'user appuie, l'url du fetch change
-function fetchWeather({ value, unit }) {
-  // unitParameter = unitParameter === 'metric' ? 'imperial' : 'metric';
-
-  // unitParameter === 'imperial' ? btnMetric.innerHTML = 'Switch to Imperial' : btnMetric.innerHTML = 'Switch to Metric';
+// Fetch weather depending on city (value) and unit
+function fetchWeather({ value }) {
   return(
     fetch(`http://localhost:3002/api/search?q=${encodeURIComponent(value)}`)
     .then(res => res.json())
@@ -183,20 +179,14 @@ function fetchWeather({ value, unit }) {
       document.getElementById("location").textContent = locationResult;
 
       // Deuxième fetch pour aller récupérer les données de l'API Open Meteo
-      const meteoUrlBase = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&timezone=auto`;
-
-      const meteoUnits = {
-        metric: meteoUrlBase,
-        imperial: `${meteoUrlBase}&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`
-      };
-
-      return fetch(meteoUnits[unit]);
+      const url = buildMeteoUrl(lat, lon);
+      return fetch(url);
     })
   );
 }
 
 // Memorize city and metrics
-let currentCity = null;
+let currentCity = 'Berlin';
 let currentUnit = 'metric';
 
 // Handle different buttons listeners
@@ -204,16 +194,7 @@ searchButton.addEventListener('click', () => {
   const value = input.value;
   currentCity = value;
 
-  fetchWeather({
-    value: currentCity,
-    unit: currentUnit
-  })
-  .then(res => res.json())
-  .then(meteoData => {
-    console.log(meteoData);
-    updateWeatherUI(meteoData);
-  })
-  .catch(err => console.error(err));
+  refreshWeather();
 });
 
 btnMetric.addEventListener('click', () => {
@@ -222,26 +203,81 @@ btnMetric.addEventListener('click', () => {
 
   currentUnit === 'imperial' ? btnMetric.innerHTML = 'Switch to Metric' : btnMetric.innerHTML = 'Switch to Imperial';
 
-  // Fetch depending on unit
-  fetchWeather({
-    value: currentCity,
-    unit: currentUnit
-  })
+  if (currentUnit === 'metric') {
+    weatherUnits.temperature = 'celsius';
+    weatherUnits.wind = 'kmh';
+    weatherUnits.precipitation = 'mm';
+  } else if (currentUnit === 'imperial') {
+    weatherUnits.temperature = 'fahrenheit';
+    weatherUnits.wind = 'mph';
+    weatherUnits.precipitation = 'in';
+  }
+
+  const tempRadio = document.querySelector(`input[name="temperature-unit"][value="${weatherUnits.temperature}"]`);
+  const windRadio = document.querySelector(`input[name="wind-unit"][value="${weatherUnits.wind}"]`);
+  const precipRadio = document.querySelector(`input[name="precipitation-unit"][value="${weatherUnits.precipitation}"]`);
+
+  if (tempRadio) tempRadio.checked = true;
+  if (windRadio) windRadio.checked = true;
+  if (precipRadio) precipRadio.checked = true;
+
+  refreshWeather();
+});
+
+// Make the individual unit selection
+// Global state
+const weatherUnits = {
+  temperature: 'celsius',
+  wind: 'kmh',
+  precipitation: 'mm'
+};
+
+function buildMeteoUrl(lat, lon) {
+  const meteoUrlBase = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&current=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m,apparent_temperature,weather_code&hourly=temperature_2m,weather_code&timezone=auto`;
+
+  const params = [];
+
+  if (weatherUnits.temperature === 'fahrenheit') {
+    params.push('temperature_unit=fahrenheit');
+  }
+
+  if (weatherUnits.wind === 'mph') {
+    params.push('wind_speed_unit=mph');
+  }
+
+  if (weatherUnits.precipitation === 'in') {
+    params.push('precipitation_unit=inch');
+  }
+
+  return params.length
+    ? `${meteoUrlBase}&${params.join('&')}`
+  : meteoUrlBase;
+} 
+
+function refreshWeather() {
+  fetchWeather({ value: currentCity })
   .then(res => res.json())
   .then(meteoData => {
-    console.log(meteoData);
     updateWeatherUI(meteoData);
   })
   .catch(err => console.error(err));
-});
+}
 
-// Comportement vraiment différent entre search et sélection
-// Changer le HTML pour pouvoir utiliser selected
-// En fonction du bouton, faire un fetch différent et passer la valeur du fetch que tu dois avoir dans l'addEventListener
+function handleRadioGroup(selector, unitType) {
+  const inputs = document.querySelectorAll(selector);
 
-// Si l'utilisateur change de métrique, alors ajouter certains paramètres à l'url de base
-// Global metric variable
-const unitValue = 'metric';
-const tempValue = 'celsius';
-const windValue = 'km';
-const prepValue = 'mm';
+  inputs.forEach(input => {
+    input.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        weatherUnits[unitType] = e.target.value;
+        refreshWeather();
+      }
+    })
+  })
+};
+
+handleRadioGroup('input[name="temperature-unit"]', 'temperature');
+
+handleRadioGroup('input[name="wind-unit"]', 'wind');
+
+handleRadioGroup('input[name="precipitation-unit"]', 'precipitation');

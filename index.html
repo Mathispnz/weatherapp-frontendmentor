@@ -18,32 +18,51 @@
       <div class="dropdown-content w-[214px] rounded-xl py-1.5 px-2 mt-10">
         <button class="btn--metric rounded-lg py-2.5 px-2 hover:bg-colorneutral600 transition-all duration-300 ease-in-out">Switch to Imperial</button>
 
-        <label for="" class="mt-1 pt-1.5 pl-2">Temperature</label>
+        <fieldset class="mb-3">
+          <legend class="mt-1 pt-1.5 pl-2">Temperature</legend>
 
-        <button class="btn-select">Celsius (°C)</button>
-        <button class="btn-select">Fahrenheit (°F)</button>
+          <label class="btn-select">
+            <input type="radio" name="temperature-unit" value="celsius" checked />
+            Celsius (°C)
+          </label>
 
-        <div class="separator mx-2 my-1"></div>
-
-        <label for="" class="mt-1 pt-1.5 pl-2">Wind speed</label>
-        <!-- <select name="Wind speed" id="">
-          <option value="km">km/h</option>
-          <option value="mph">mph</option>
-        </select> -->
-
-        <button class="btn-select">km/h</button>
-        <button class="btn-select">mph</button>
+          <label class="btn-select">
+            <input type="radio" name="temperature-unit" value="fahrenheit" />
+            Fahrenheit (°F)
+          </label>
+        </fieldset>
 
         <div class="separator mx-2 my-1"></div>
 
-        <label for="" class="mt-1 pt-1.5 pl-2">Precipitation</label>
-        <!-- <select name="Precipitation" id="">
-          <option value="mm">Millimeters (mm)</option>
-          <option value="in">Inches (in)</option>
-        </select> -->
+        <fieldset class="mb-3">
+          <legend class="mt-1 pt-1.5 pl-2">Wind Speed</legend>
 
-        <button class="btn-select">Millimeters (mm)</button>
-        <button class="btn-select">Inches (in)</button>
+          <label class="btn-select">
+            <input type="radio" name="wind-unit" value="kmh" checked />
+            km/h
+          </label>
+
+          <label class="btn-select">
+            <input type="radio" name="wind-unit" value="mph" />
+            mph
+          </label>
+        </fieldset>
+
+        <div class="separator mx-2 my-1"></div>
+
+        <fieldset>
+          <legend class="mt-1 pt-1.5 pl-2">Precipitation</legend>
+
+          <label class="btn-select">
+            <input type="radio" name="precipitation-unit" value="mm" checked />
+            Millimeters (mm)
+          </label>
+
+          <label class="btn-select">
+            <input type="radio" name="precipitation-unit" value="in" />
+            Inches (in)
+          </label>
+        </fieldset>
       </div>
     </div>
   </nav>
