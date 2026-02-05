@@ -4,6 +4,7 @@
 // Récupérer la valeur de l'input de search
 // Au moment où l'utilisateur clique sur search, afficher la ville correspondante
 
+let weatherData = null;
 const input = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchBtn");
 const btnMetric = document.querySelector('.btn--metric');
@@ -117,7 +118,127 @@ function updateWeatherUI(data) {
       </div>
     `;
   };
+
+  // Update current day in day selection dropdown
+  const daysInput = document.querySelectorAll('input[name="select-days"]');
+  const today = now.getDay();
+
+  daysInput.forEach(input => {
+    if (today === Number(input.value)) {
+      const label = input.closest('label');
+      buttonDropdownDays.innerHTML = `${label.textContent.trim()} <img class="dropdown-icon w-3.5" src="./assets/images/icon-dropdown.svg" />`;
+      input.checked = true;
+    }
+  })
 }
+
+// Handle day selection for hourly forecast
+const dropdownDays = document.querySelector('.dropdown-days');
+const buttonDropdownDays = document.querySelector('.dropdown-button-days');
+
+buttonDropdownDays.addEventListener('click', () => {
+  dropdownDays.style.display =
+    dropdownDays.style.display === "block" ? "none" : "block";
+});
+
+// If the user clicks on a day, refresh the forecast and preview the hours from 9am to 5pm
+// function inputDaySelection() {
+//   const inputsDays = document.querySelectorAll('input[name="select-days"]');
+
+//   inputsDays.forEach(input => {
+//     input.addEventListener('change', (e) => {
+//       if (e.target.checked) {
+//         console.log(e.target.value);
+//         console.log(new Date().getDay(7));
+
+//         console.log(new Date().getDay(e.target.value));
+//         // Find index that the user selected
+//         const startIndex = data.hourly.time.findIndex(time => {
+//           return new Date(time) >= now;
+//         })
+//         return e.target.value;
+//       }
+
+//     })
+//   })
+// }
+
+function getNextDateForWeekday(selectedDay) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const jsSelectedDay = selectedDay % 7;
+
+  const todayDay = today.getDay();
+  let diff = jsSelectedDay - todayDay;
+
+  if (diff < 0) {
+    diff += 7;
+  }
+
+  const targetDate = new Date(today);
+  targetDate.setDate(today.getDate() + diff);
+  targetDate.setHours(9, 0, 0, 0);
+
+  return targetDate;
+}
+
+function findStartIndexForSelectedDay(selectedDay) {
+  const targetDate = getNextDateForWeekday(selectedDay);
+
+  return weatherData.hourly.time.findIndex(time => {
+    return new Date(time).getTime() === targetDate.getTime();
+  });
+}
+
+function refreshHourlyForecast(selectedDay) {
+  const hourlyContainer = document.querySelector('.hourly_container');
+  hourlyContainer.innerHTML = '';
+
+  const startIndex = findStartIndexForSelectedDay(Number(selectedDay));
+
+  if (startIndex === -1) {
+    console.warn('Aucune donnée trouvée pour ce jour');
+    return;
+  }
+
+  for (let i = startIndex; i < startIndex + 9; i++) {
+    const hourlyTemp = weatherData.hourly.temperature_2m[i];
+    const hourlyIcon = weatherIcon(weatherData.hourly.weather_code[i]);
+    const hourlyTime = formatHour(weatherData.hourly.time[i]);
+
+    hourlyContainer.innerHTML += `
+      <div class="hourly_container card card--light flex flex-row items-center justify-between mt-4 py-2 px-3">
+        <div class="flex flex-row items-center">
+          <img src="${hourlyIcon}" alt="" class="card__icon w-10">
+          <p class="card__hour ml-2">${hourlyTime}</p>
+        </div>
+        <p class="card__temperature">${hourlyTemp}<sup>°</sup></p>
+      </div>
+    `;
+  }
+}
+
+function getSelectedDay(value) {
+  const date = new Date();
+  date.setHours(9, 0, 0, 0);
+  date.setDate(date.getDate() + value);
+  return date;
+}
+
+function inputDaySelection() {
+  const inputsDays = document.querySelectorAll('input[name="select-days"]');
+
+  inputsDays.forEach(input => {
+    input.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        refreshHourlyForecast(e.target.value);
+      }
+    });
+  });
+}
+
+inputDaySelection();
 
 // Update weather icon en fonction du weather code
 function weatherIcon(weatherCode) {
@@ -133,10 +254,10 @@ function weatherIcon(weatherCode) {
   if (weatherCode === 45 || weatherCode ===  48) {
     return "./assets/images/icon-fog.webp";
   }
-  if (weatherCode === 53) {
+  if ([51, 53, 55].includes(weatherCode)) {
     return "./assets/images/icon-drizzle.webp";
   }
-  if (weatherCode === 63) {
+  if ([61, 63, 65, 80, 81, 82].includes(weatherCode)) {
     return "./assets/images/icon-rain.webp";
   }
   if (weatherCode === 73) {
@@ -149,12 +270,12 @@ function weatherIcon(weatherCode) {
 }
 
 // Dropdown display toggle
-const dropdown = document.querySelector('.dropdown-content');
-const buttonDropdown = document.querySelector('.dropdown-button');
+const dropdownUnit = document.querySelector('.dropdown-units');
+const buttonDropdownUnit = document.querySelector('.dropdown-button-units');
 
-buttonDropdown.addEventListener('click', () => {
-  dropdown.style.display =
-    dropdown.style.display === "block" ? "none" : "block";
+buttonDropdownUnit.addEventListener('click', () => {
+  dropdownUnit.style.display =
+    dropdownUnit.style.display === "block" ? "none" : "block";
 });
 
 // Fetch weather depending on city (value) and unit
@@ -258,6 +379,8 @@ function refreshWeather() {
   fetchWeather({ value: currentCity })
   .then(res => res.json())
   .then(meteoData => {
+    console.log(meteoData);
+    weatherData = meteoData;
     updateWeatherUI(meteoData);
   })
   .catch(err => console.error(err));

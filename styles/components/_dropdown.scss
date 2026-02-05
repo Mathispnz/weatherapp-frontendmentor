@@ -10,7 +10,9 @@
     top: 0;
     right: 0;
     background: c.$color-neutral-800;
+    border: 1px solid c.$color-neutral-600;
     box-sizing: border-box;
+    z-index: 2;
 
     label {
         color: c.$color-neutral-300;
