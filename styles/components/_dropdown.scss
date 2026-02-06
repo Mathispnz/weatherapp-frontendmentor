@@ -14,7 +14,26 @@
     box-sizing: border-box;
     z-index: 2;
 
+    input[type="radio"] {
+        appearance: none;
+    }
+    label:has(input:checked) {
+        background: c.$color-neutral-600;
+        &::after {
+            content: url("/assets/images/icon-checkmark.svg");
+            position: absolute;
+            width: 14px;
+            height: 17px;
+            right: 8px;
+        }
+    }
     label {
+        position: relative;
+        cursor: pointer;
+        color: white;
+        @include t.text-preset-7;
+    }
+    legend {
         color: c.$color-neutral-300;
         @include t.text-preset-8;
     }
