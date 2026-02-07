@@ -5,7 +5,9 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"gulp\" \"node ./backend/server\""
+    "build": "gulp build",
+    "node": "node ./backend/server",
+    "dev": "concurrently \"gulp\" \"node ./backend/server\""
   },
   "repository": {
     "type": "git",

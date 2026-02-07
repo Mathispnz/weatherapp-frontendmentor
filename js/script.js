@@ -141,28 +141,6 @@ buttonDropdownDays.addEventListener('click', () => {
     dropdownDays.style.display === "block" ? "none" : "block";
 });
 
-// If the user clicks on a day, refresh the forecast and preview the hours from 9am to 5pm
-// function inputDaySelection() {
-//   const inputsDays = document.querySelectorAll('input[name="select-days"]');
-
-//   inputsDays.forEach(input => {
-//     input.addEventListener('change', (e) => {
-//       if (e.target.checked) {
-//         console.log(e.target.value);
-//         console.log(new Date().getDay(7));
-
-//         console.log(new Date().getDay(e.target.value));
-//         // Find index that the user selected
-//         const startIndex = data.hourly.time.findIndex(time => {
-//           return new Date(time) >= now;
-//         })
-//         return e.target.value;
-//       }
-
-//     })
-//   })
-// }
-
 function getNextDateForWeekday(selectedDay) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);

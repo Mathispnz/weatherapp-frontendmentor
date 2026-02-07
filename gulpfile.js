@@ -12,6 +12,12 @@ const tailwindcss = require('tailwindcss');
 // Use dart-sass for @use
 //sass.compiler = require('dart-sass');
 
+// Html task
+function htmlTask() {
+  return src(['*.html', '**/*.html'])
+    .pipe(dest('dist'));
+} 
+
 // Sass Task
 function scssTask() {
   return src('styles/main.scss', { sourcemaps: true })
@@ -62,7 +68,7 @@ function watchTask() {
 }
 
 // Default Gulp Task
-exports.default = series(scssTask, jsTask, browserSyncServe, watchTask);
+exports.default = series(htmlTask, scssTask, jsTask, browserSyncServe, watchTask);
 
 // Build Gulp Task
-exports.build = series(scssTask, jsTask);
+exports.build = series(htmlTask, scssTask, jsTask);
