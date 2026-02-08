@@ -256,10 +256,15 @@ buttonDropdownUnit.addEventListener('click', () => {
     dropdownUnit.style.display === "block" ? "none" : "block";
 });
 
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3002"
+    : "https://weatherapp-frontendmentor-server.onrender.com";
+
 // Fetch weather depending on city (value) and unit
 function fetchWeather({ value }) {
   return(
-    fetch(`http://localhost:3002/api/search?q=${encodeURIComponent(value)}`)
+    fetch(`${API_URL}/api/search?q=${encodeURIComponent(value)}`)
     .then(res => res.json())
     .then(data => {
       if (!data.length) {
@@ -357,7 +362,6 @@ function refreshWeather() {
   fetchWeather({ value: currentCity })
   .then(res => res.json())
   .then(meteoData => {
-    console.log(meteoData);
     weatherData = meteoData;
     updateWeatherUI(meteoData);
   })
